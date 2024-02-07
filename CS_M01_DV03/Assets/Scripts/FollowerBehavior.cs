@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class FollowerBehavior : MonoBehaviour
 {
+    public GameBehavior gameManager;
+
+    private void Start()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameBehavior>();
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.name == "Player")
@@ -11,6 +18,8 @@ public class FollowerBehavior : MonoBehaviour
             Destroy(this.transform.parent.gameObject);
 
             Debug.Log("Follower collected!");
+
+            gameManager.Items += 1;
         }
     }
 }
